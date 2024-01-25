@@ -70,9 +70,15 @@
       for (let i = 0; i < choices.length; i++) {
         const button = document.createElement('button');
         button.textContent = choices[i];
-        button.onclick = handleChoice;
+        button.onclick = function () {
+          handleChoice(choices[i]);
+        };
         document.getElementById('game-container').appendChild(button);
       }
+      const nextButton = document.createElement('button');
+      nextButton.textContent = 'Next';
+      nextButton.onclick = startGame;
+      document.getElementById('game-container').appendChild(nextButton);
     }
 
     function hideChoices() {
@@ -80,83 +86,71 @@
       buttons.forEach(button => button.remove());
     }
 
-    function handleChoice() {
+    function handleChoice(choice) {
+      let outcome;
       if (currentDay === 1) {
-        handleDay1Choice(this.textContent);
+        outcome = handleDay1Choice(choice);
       } else if (currentDay === 2) {
-        handleDay2Choice(this.textContent);
+        outcome = handleDay2Choice(choice);
       } else if (currentDay === 3) {
-        handleDay3Choice(this.textContent);
+        outcome = handleDay3Choice(choice);
       } else if (currentDay === 4) {
-        handleDay4Choice(this.textContent);
+        outcome = handleDay4Choice(choice);
       } else if (currentDay === 5) {
-        handleDay5Choice(this.textContent);
+        outcome = handleDay5Choice(choice);
       }
+
+      document.getElementById('game-text').innerHTML = outcome;
     }
 
     function handleDay1Choice(choice) {
-      let outcome;
       if (choice === "Investigate the Crime Scene") {
-        outcome = "You find additional blood spatter patterns and signs of a struggle.";
+        return "You find additional blood spatter patterns and signs of a struggle.";
       } else if (choice === "Cross-Examine Witnesses") {
-        outcome = "You uncover inconsistencies in the mansion staff testimonies.";
+        return "You uncover inconsistencies in the mansion staff testimonies.";
       } else if (choice === "Challenge Fingerprints") {
-        outcome = "You question the reliability of the forensic analysis on the fingerprints.";
+        return "You question the reliability of the forensic analysis on the fingerprints.";
       }
-      document.getElementById('game-text').innerHTML = outcome + " Click 'Next' to proceed.";
-      startGame();
     }
 
     function handleDay2Choice(choice) {
-      let outcome;
       if (choice === "Follow the Money") {
-        outcome = "You investigate Victor's offshore account, revealing financial misconduct.";
+        return "You investigate Victor's offshore account, revealing financial misconduct.";
       } else if (choice === "Analyze DNA") {
-        outcome = "The DNA analysis leads you to suspect an unknown accomplice.";
+        return "The DNA analysis leads you to suspect an unknown accomplice.";
       } else if (choice === "Contact the Informant") {
-        outcome = "You meet the shadowy informant, who provides a lead on another potential suspect.";
+        return "You meet the shadowy informant, who provides a lead on another potential suspect.";
       }
-      document.getElementById('game-text').innerHTML = outcome + " Click 'Next' to proceed.";
-      startGame();
     }
 
     function handleDay3Choice(choice) {
-      let outcome;
       if (choice === "Question Lucas") {
-        outcome = "You cross-examine Lucas, exposing his financial difficulties and strained relationship with his father.";
+        return "You cross-examine Lucas, exposing his financial difficulties and strained relationship with his father.";
       } else if (choice === "Challenge Security Footage") {
-        outcome = "You raise doubts about the authenticity of the security footage, casting uncertainty on Lucas's presence near the mansion.";
+        return "You raise doubts about the authenticity of the security footage, casting uncertainty on Lucas's presence near the mansion.";
       } else if (choice === "Examine Victor's Financial Records") {
-        outcome = "You discover additional motives and hidden transactions in Victor's financial records.";
+        return "You discover additional motives and hidden transactions in Victor's financial records.";
       }
-      document.getElementById('game-text').innerHTML = outcome + " Click 'Next' to proceed.";
-      startGame();
     }
 
     function handleDay4Choice(choice) {
-      let outcome;
       if (choice === "Present the Diary Entries") {
-        outcome = "You present Victor's diary entries, exposing his betrayal of Isabella and providing a motive for revenge.";
+        return "You present Victor's diary entries, exposing his betrayal of Isabella and providing a motive for revenge.";
       } else if (choice === "Confront Rebecca") {
-        outcome = "You confront Rebecca about her affair with Victor, raising questions about her potential involvement in the murder.";
+        return "You confront Rebecca about her affair with Victor, raising questions about her potential involvement in the murder.";
       } else if (choice === "Revisit Isabella's Motive") {
-        outcome = "You reexamine Isabella's motive in light of the newly discovered diary entries, presenting a stronger case for her innocence.";
+        return "You reexamine Isabella's motive in light of the newly discovered diary entries, presenting a stronger case for her innocence.";
       }
-      document.getElementById('game-text').innerHTML = outcome + " Click 'Next' to proceed.";
-      startGame();
     }
 
     function handleDay5Choice(choice) {
-      let verdict;
       if (choice === "Expose Lucas") {
-        verdict = "Lucas confesses to manipulating evidence, seeking revenge for his mother's ruin.";
+        return "Lucas confesses to manipulating evidence, seeking revenge for his mother's ruin.";
       } else if (choice === "Implicate Rebecca") {
-        verdict = "Rebecca is convicted for the murder. The truth behind Victor's betrayal and Isabella's financial ruin is laid bare.";
+        return "Rebecca is convicted for the murder. The truth behind Victor's betrayal and Isabella's financial ruin is laid bare.";
       } else if (choice === "Defend Isabella") {
-        verdict = "Isabella is acquitted. Lucas faces charges for tampering with evidence.";
+        return "Isabella is acquitted. Lucas faces charges for tampering with evidence.";
       }
-      document.getElementById('game-text').innerHTML = "Day 5 - The Verdict: " + verdict + " The game has concluded. Thank you for playing!";
-      isGameOver = true;
     }
   </script>
 </body>
