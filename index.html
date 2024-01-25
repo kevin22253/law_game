@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echoes of Guilt</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    #game-container {
+      max-width: 600px;
+      margin: auto;
+      border: 2px solid #333;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    button {
+      display: block;
+      margin-top: 10px;
+      padding: 5px 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <h1>Echoes of Guilt</h1>
+    <p id="game-text">Welcome to the thrilling courtroom drama. Click 'Next' to start the game.</p>
+    <button onclick="startGame()">Next</button>
+  </div>
+
+  <script>
+    let currentDay = 0;
+
+    function startGame() {
+      currentDay++;
+      if (currentDay === 1) {
+        document.getElementById('game-text').innerHTML = "Day 1 - The Crime Scene: You are defense attorney Mia Phoenix. Investigate the crime scene.";
+        showChoices(["Investigate the Crime Scene", "Cross-Examine Witnesses", "Challenge Fingerprints"]);
+      } else if (currentDay === 2) {
+        document.getElementById('game-text').innerHTML = "Day 2 - Investigation Unveiled: Explore downtown Phoenixburg for new leads.";
+        showChoices(["Follow the Money", "Analyze DNA", "Contact the Informant"]);
+      } else if (currentDay === 3) {
+        document.getElementById('game-text').innerHTML = "Day 3 - Trial Twists: Present new evidence in the courtroom.";
+        showChoices(["Question Lucas", "Challenge Security Footage", "Examine Victor's Financial Records"]);
+      } else if (currentDay === 4) {
+        document.getElementById('game-text').innerHTML = "Day 4 - Revelation of the Past: Uncover secrets in Mia's law office and Victor's study.";
+        showChoices(["Present the Diary Entries", "Confront Rebecca", "Revisit Isabella's Motive"]);
+      } else if (currentDay === 5) {
+        document.getElementById('game-text').innerHTML = "Day 5 - The Verdict: The final showdown in Phoenixburg Courthouse.";
+        showChoices(["Expose Lucas", "Implicate Rebecca", "Defend Isabella"]);
+      } else {
+        document.getElementById('game-text').innerHTML = "The game has concluded. Thank you for playing!";
+        hideChoices();
+      }
+    }
+
+    function showChoices(choices) {
+      for (let i = 0; i < choices.length; i++) {
+        const button = document.createElement('button');
+        button.textContent = choices[i];
+        button.onclick = handleChoice;
+        document.getElementById('game-container').appendChild(button);
+      }
+    }
+
+    function hideChoices() {
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach(button => button.remove());
+    }
+
+    function handleChoice() {
+      if (currentDay === 1) {
+        handleDay1Choice(this.textContent);
+      } else if (currentDay === 2) {
+        handleDay2Choice(this.textContent);
+      } else if (currentDay === 3) {
+        handleDay3Choice(this.textContent);
+      } else if (currentDay === 4) {
+        handleDay4Choice(this.textContent);
+      } else if (currentDay === 5) {
+        handleDay5Choice(this.textContent);
+      }
+    }
+
+    function handleDay1Choice(choice) {
+      if (choice === "Investigate the Crime Scene") {
+        document.getElementById('game-text').innerHTML = "You find additional blood spatter patterns and signs of a struggle.";
+      } else if (choice === "Cross-Examine Witnesses") {
+        document.getElementById('game-text').innerHTML = "You uncover inconsistencies in the mansion staff testimonies.";
+      } else if (choice === "Challenge Fingerprints") {
+        document.getElementById('game-text').innerHTML = "You question the reliability of the forensic analysis on the fingerprints.";
+      }
+      startGame();
+    }
+
+    function handleDay2Choice(choice) {
+      if (choice === "Follow the Money") {
+        document.getElementById('game-text').innerHTML = "You investigate Victor's offshore account, revealing financial misconduct.";
+      } else if (choice === "Analyze DNA") {
+        document.getElementById('game-text').innerHTML = "The DNA analysis leads you to suspect an unknown accomplice.";
+      } else if (choice === "Contact the Informant") {
+        document.getElementById('game-text').innerHTML = "You meet the shadowy informant, who provides a lead on another potential suspect.";
+      }
+      startGame();
+    }
+
+    function handleDay3Choice(choice) {
+      if (choice === "Question Lucas") {
+        document.getElementById('game-text').innerHTML = "You cross-examine Lucas, exposing his financial difficulties and strained relationship with his father.";
+      } else if (choice === "Challenge Security Footage") {
+        document.getElementById('game-text').innerHTML = "You raise doubts about the authenticity of the security footage, casting uncertainty on Lucas's presence near the mansion.";
+      } else if (choice === "Examine Victor's Financial Records") {
+        document.getElementById('game-text').innerHTML = "You discover additional motives and hidden transactions in Victor's financial records.";
+      }
+      startGame();
+    }
+
+    function handleDay4Choice(choice) {
+      if (choice === "Present the Diary Entries") {
+        document.getElementById('game-text').innerHTML = "You present Victor's diary entries, exposing his betrayal of Isabella and providing a motive for revenge.";
+      } else if (choice === "Confront Rebecca") {
+        document.getElementById('game-text').innerHTML = "You confront Rebecca about her affair with Victor, raising questions about her potential involvement in the murder.";
+      } else if (choice === "Revisit Isabella's Motive") {
+        document.getElementById('game-text').innerHTML = "You reexamine Isabella's motive in light of the newly discovered diary entries, presenting a stronger case for her innocence.";
+      }
+      startGame();
+    }
+
+    function handleDay5Choice(choice) {
+      if (choice === "Expose Lucas") {
+        document.getElementById('game-text').innerHTML = "You confront Lucas on the stand, leading to a confession and a potential trial against him.";
+      } else if (choice === "Implicate Rebecca") {
+        document.getElementById('game-text').innerHTML = "You gather enough evidence against Rebecca, presenting a case that exposes her as the true mastermind.";
+      } else if (choice === "Defend Isabella") {
+        document.getElementById('game-text').innerHTML = "You focus on proving Isabella's innocence, forcing Lucas to confess and revealing the depth of the conspiracy.";
+      }
+      startGame();
+    }
+  </script>
+</body>
+</html>
